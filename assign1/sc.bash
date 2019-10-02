@@ -40,3 +40,18 @@ function test() {
     crossword_solver DLB dict8.txt raw/$input $verb
     cd $root_dir
 }
+
+function package() {
+    root_dir=$(pwd)
+    build
+    mkdir ${PROJECT_ROOT_DIR}/build/Submission
+    cp ${PROJECT_ROOT_DIR}/src/* ${PROJECT_ROOT_DIR}/build/Submission
+    cp -r ${PROJECT_ROOT_DIR}/package_include/* ${PROJECT_ROOT_DIR}/build/Submission
+
+    cd ${PROJECT_ROOT_DIR}/build/Submission
+    if [ -e ${PROJECT_ROOT_DIR}/build/submit.zip ]; then
+        rm ${PROJECT_ROOT_DIR}/build/submit.zip
+    fi
+    find . -path '*/.*' -prune -o -type f -print | zip ${PROJECT_ROOT_DIR}/build/submit.zip -@
+    cd $root_dir
+}

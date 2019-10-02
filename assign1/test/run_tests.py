@@ -5,70 +5,52 @@ import glob
 import argparse
 import shutil
 import shlex
+import time
+
+# ignore_ind = ["9", "8", "7", "6"]
+# ignore_ind = ["7a", "6c", "6b", "3a", "6a", "3b", "4d", "4e", "5a", "4f", "8a", "8b"]
+ignore_ind = ["3a", "4a", "4b", "4e", "5a", "6a", "6b", "7a", "8a", "8b", "6c"]
+implementations = ["MyDict"]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", help="Directory to take input from", default="./input")
-    parser.add_argument("--control", help="Directory containing control output to compare", default="./control")
-    parser.add_argument("--output", help="Directory to place output", default="./output")
+    parser.add_argument("--input", help="Directory to take input from", default="./raw")
+    parser.add_argument("--dict", help="Directory to take input from", default="dict8.txt")
     args = parser.parse_args()
-    if os.path.exists(args.output):
-        shutil.rmtree(args.output)
-    os.mkdir(args.output)
+    files = glob.glob(os.path.join(args.input, "*.txt"))
+    i = 0
+    for imple in implementations:
+        results = []
+        for file in files:
+            ignore = False
+            for ind in ignore_ind:
+                if ind in file:
+                    print("Ignoring %s for index: %s"%(file, ind))
+                    ignore = True
+            if ignore:
+                continue
+            print("Running on %s"%(file))
+            command = "time crossword_solver %s %s %s"%(imple, args.dict, file)
+            start = time.time()
+            out = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE)
+            exec_time = time.time() - start
+            run_time = 2 * 60 * 60 # 2 hours in seconds
+            # run_time = 2
+            killed = False
+            while out.poll() == None:
+                exec_time = time.time() - start
+                if exec_time > run_time:
+                    killed = True
+                    out.kill()
+                    break;
+                time.sleep(.1)
+            result = 0
+            if not killed:
+                result = out.communicate()[0][:-1]
+            results.append("%s\t%s\t%f\t%s\t%s"%(imple, file, exec_time, "True" if not killed else "False", result if not killed else "N/A"))
+        for result in results:
+            print(result)
 
-    input_data_raw = glob.glob(os.path.join(args.input, "*.in"))
-    control_data_raw = glob.glob(os.path.join(args.control, "*.out"))
-    tests = []
-    for file in input_data_raw:
-        base = os.path.split(file[:-3])[1]
-        out_name = os.path.join(args.control,base + ".out")
-        if out_name in control_data_raw:
-            tests.append(base)
-        else:
-            print("No control data found for test: %s"%(os.path.split(base)[1]))
-
-    successes = []
-    failures = []
-    for test in tests:
-        output = ""
-        failure = False
-        input_file = os.path.join(args.input, test + ".in")
-        control_file = os.path.join(args.control, test + ".out")
-        output_file = os.path.join(args.output, test + ".test")
-        command = "lexer %s %s"%(input_file, output_file)
-        test_command = "diff %s %s"%(control_file, output_file)
-
-        output += "*** Running test: %s ****\n"%(test)
-        output += "Using command: %s\n"%(command)
-        try:
-            subprocess.check_output(shlex.split(command))
-        except Exception as err:
-            output += "!!! Command failed.\n"
-            failure = True
-        try:
-            output += "Testing output with command: %s\n"%(test_command)
-            subprocess.check_output(shlex.split(test_command))
-            successes.append(test)
-        except Exception as err:
-            output += "!!! Test Failed.\n"
-            failures.append(test)
-        if failure:
-            print(output)
-            print("")
-
-    if len(successes) != 0:
-        print("%s Tests Succeeded."%(len(successes)))
-        for test in successes:
-            print("    %s"%(test))
-    else:
-        print("No Tests Succeeded.")
-
-    if len(failures) != 0:
-        print("%s Tests Failed."%(len(failures)))
-        for test in failures:
-            print("    %s"%(test))
-    else:
-        print("No Tests Failed.")
 
 if __name__ == "__main__":
     main()

@@ -1,13 +1,31 @@
+/**
+ * @file CrosswordB.java
+ * @author Joshua Spisak <jjs231@pitt.edu>
+ * @date 09/18/2019
+ * @brief loads in a dictionary and a crossword and counts valid solutions
+ **/
 import java.io.*;
 import java.util.*;
 
+/**
+ * @brief finds the number of valid crossword solutions
+ **/
 public class CrosswordB {
+    //! The Dictionary to query
     static DictInterface dictionary;
+    //! The crossword state
     static CrosswordState crossword;
+    //! Whether or not to only find the first solution
     static boolean find_first_solution = false;
+    //! Verbosity Level
     static int verbosity = 0;
-    static int solutions = 0;
+    //! Number of solutions found
+    static long solutions = 0;
 
+    /**
+     * @brief receives commmand line arguments, loads the dictionary and
+     *  crossword, executes the solve.
+     **/
     public static void main(String[] args) throws IOException {
         if(args.length < 3) {
             System.out.println("Insufficient arguments provided.");
@@ -15,13 +33,13 @@ public class CrosswordB {
             return;
         }
 
+        // Load in the dictionary.
         if(!args[0].equals("DLB")) {
             dictionary = new MyDictionary();
         } else {
-            dictionary = new DLBDict();
+            dictionary = new DLB();
         }
 
-        // Load in the dictionary.
         Scanner dictionary_scan = new Scanner(new FileInputStream(args[1]));
         while (dictionary_scan.hasNext()) {
             String next_line = dictionary_scan.nextLine();
@@ -43,13 +61,22 @@ public class CrosswordB {
 
         // Execute the solve
         solve(0, 0);
+        // Only print the number of solutions if verbosity is up or not finding
+        // the first solution
         if(verbosity > 0) {
             System.out.println("Final Solutions: " + solutions);
-        } else {
+        }
+        if(!find_first_solution && verbosity == 0) {
             System.out.println(solutions);
         }
-    }
+    } /* main(String[] args) */
 
+    /**
+     * @brief tests a specific cell of the current crossword state
+     * @param[in] row the row number to check
+     * @param[in] column the column number to check
+     * @returns true if it is valid, false if not
+     **/
     public static boolean test(int row, int column) {
         // Whether or not the next parts are in this word or we are completing the word now
         boolean can_use_next_horiz = crossword.isWord(row, column + 1);
@@ -72,9 +99,8 @@ public class CrosswordB {
                     return false;
             }
             if(can_use_next_vert) {
-                if(!(vert_validity == 1 || vert_validity == 3)) {
+                if(!(vert_validity == 1 || vert_validity == 3))
                     return false;
-                }
             } else {
                 if(vert_validity < 2)
                     return false;
@@ -82,16 +108,20 @@ public class CrosswordB {
             return true;
         } /* if(horiz_validity && vert_validity) */
         return false;
-    }
+    } /* test(int row, int column) */
 
-    public static boolean test_next(int row, int column) {
+    /**
+     * @brief finds the next cell to solve (and calls solve) or marks a successs
+     * @param[in] row is the current row
+     * @param[in] column is the current column
+     **/
+    public static void solve_next(int row, int column) {
         if(column < crossword.length() - 1) {
-            return solve(row, column + 1);
+            solve(row, column + 1);
         } else if(row < crossword.length() - 1) {
-            return solve(row + 1, 0);
+            solve(row + 1, 0);
         } else {
             // If there is none then this is a success board
-            // solve is already true
             if(verbosity >= 2) {
                 System.out.println("Success!!!");
                 crossword.print();
@@ -100,11 +130,18 @@ public class CrosswordB {
             if(verbosity >= 1 && solutions % 20 == 0) {
                 System.out.println("Solutions = " + solutions);
             }
-            return true;
+            if(find_first_solution) {
+                crossword.print();
+            }
         }
-    }
+    } /* solve_next(int row, int column) */
 
-    public static boolean solve(int row, int column) {
+    /**
+     * @brief solves for a certain row and column
+     * @param[in] row is the row to solve
+     * @param[in] column is the column to solve
+     **/
+    public static void solve(int row, int column) {
         // Checks if it is part of a word
         if(crossword.isWord(row, column)) {
             if(verbosity >= 3) {
@@ -113,50 +150,23 @@ public class CrosswordB {
             }
             // sees if we can modify the letter, or we just need to test it
             if(crossword.canChange(row, column)) {
+                // Try each letter
                 for(char new_char = 'a'; new_char <= 'z'; ++new_char) {
                     crossword.set(row, column, new_char);
-                    boolean solved;
                     if(test(row, column)) {
-                        solved = test_next(row, column);
-                    } else {
-                        solved = false;
-                    }
-                    if(solved && find_first_solution) {
-                        return true;
+                        solve_next(row, column);
                     }
                     crossword.unset(row, column);
                 }
-                return false;
             } else {
-                boolean solved;
+                // We can test with the current letter
                 if(test(row, column)) {
-                    if(test_next(row, column) && find_first_solution) {
-                        return true;
-                    }
-                } else {
-                    return false;
+                    solve_next(row, column);
                 }
             }
-            // If we get here we can just assume we didn't find a solution
-            return false;
         } else {
-            // We can't do anything so go to next coord.
-            if(column < crossword.length() - 1) {
-                return solve(row, column + 1);
-            } else if(row < crossword.length() - 1) {
-                return solve(row + 1, 0);
-            } else {
-                // If there is none then this is a success board
-                if(verbosity >= 1) {
-                    System.out.println("Success!!!");
-                    crossword.print();
-                }
-                ++solutions;
-                if(verbosity >= 1 && solutions % 20 == 0) {
-                    System.out.println("Solutions = " + solutions);
-                }
-                return true;
-            }
+            // It's not a part of the word so let's just solve the next one...
+            solve_next(row, column);
         }
-    }
-}
+    } /* solve(int row, int column) */
+} /* CrosswordB */

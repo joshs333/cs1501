@@ -26,7 +26,7 @@ public class DictTest
             System.out.println(args[0]);
     		D = new MyDictionary();
         } else {
-            D = new DLBDict();
+            D = new DLB();
         }
 
 		while (fileScan.hasNext())

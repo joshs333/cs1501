@@ -1,25 +1,19 @@
-#SRC=(
-#    src/DictInterface.java
-#    src/DictTest.java
-#    src/MyDictionary.java
-#    src/DLBDict.java
-#)
-#CLASS=DictTest
-
 CrosswordSRC=(
     src/DictInterface.java
     src/MyDictionary.java
     src/Crossword.java
     src/CrosswordB.java
-    src/DLBDict.java
+    src/DLB.java
     src/DictTest.java
     src/CrosswordState.java
+    src/DLBTest.java
 )
 CrosswordClass=CrosswordB
+TestClass=DLBTest
 
-#add_src $CLASS ${SRC[@]}
-#add_jar $CLASS dict_test
-#add_executable $CLASS dict_test
+add_src $TestClass ${CrosswordSRC[@]}
+add_jar $TestClass dict_test
+add_executable $TestClass dict_test
 
 add_src $CrosswordClass ${CrosswordSRC[@]}
 add_jar $CrosswordClass crossword_solver
