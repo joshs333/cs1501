@@ -11,10 +11,9 @@ CrosswordSRC=(
 CrosswordClass=CrosswordB
 TestClass=DLBTest
 
-add_src $TestClass ${CrosswordSRC[@]}
-add_jar $TestClass dict_test
-add_executable $TestClass dict_test
+add_src Crossword ${CrosswordSRC[@]}
 
-add_src $CrosswordClass ${CrosswordSRC[@]}
-add_jar $CrosswordClass crossword_solver
-add_executable $CrosswordClass crossword_solver
+add_executable Crossword crossword_solver CrosswordB
+add_executable Crossword single_crossword_solver Crossword
+add_executable Crossword dict_test DictTest
+add_executable Crossword dlb_test DLBTest
