@@ -1,8 +1,9 @@
-/** A PHPArray is a hybrid of a hash table and a linked list.
-* It allows hash table access, indexed integer access, and
-* sequential access.
-* @author Sherif Khattab
+/**
+* @brief implements a PHPArray type data structure
+* @author Joshua Spisak <jjs231@pitt.edu>
+* @data 10/18/2019
 *
+* This is based off of some templates provided by Sherif Khattab
 **/
 
 import java.util.Iterator;
@@ -228,9 +229,28 @@ public class PHPArray<T> implements Iterable<T> {
     } /* values */
 
     /**
+     * @brief gets a list of values
+     * @param i the starting index to get values from
+     * @param j the end index of the range to select values (not inclusive)
+     * @return an ArrayList of values in the table
+     **/
+    public ArrayList<T> range(int i, int j) {
+        ArrayList<T> result = new ArrayList<T>();
+        int current = 0;
+        for(Pair<T> it = head; it != null && current < j; it = it.next) {
+            if(current >= i) {
+                result.add(it.value);
+            }
+            ++ current;
+        }
+        return result;
+    } /* values */
+
+    /**
      * @brief prints the contents of the hash table (utility function)
      **/
     public void showTable() {
+        System.out.println("\tRaw Hash Table Contents:");
         for(int i = 0; i < entries.length; ++i) {
             if(entries[i] == null)
                 System.out.println(i + ": null");
@@ -263,6 +283,7 @@ public class PHPArray<T> implements Iterable<T> {
      *  current pairs in order then adopts the new hash tables values
      **/
     private void resize(int new_capacity) {
+        System.out.println("\t\tSize: " + entry_count + " -- resizing array from " + table_size + " to " + new_capacity);
         // sim a hash table then adopt the values contained
         PHPArray<T> sim_hash_table = new PHPArray<T>(new_capacity);
 
@@ -292,6 +313,7 @@ public class PHPArray<T> implements Iterable<T> {
      * @param node the node to rehash into the table
      **/
     private void rehash(Pair<T> node){
+        System.out.println("\t\tKey " + node.key + " rehashed...\n");
         int i;
         // Find the next empty entry in the table
         for (i = hash(node.key); entries[i] != null; i = (i + 1) % table_size);
@@ -461,7 +483,51 @@ public class PHPArray<T> implements Iterable<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
+    /**
+     * @brief lets the user define a sorting function (ditching the key associations)
+     * @param comparator contains the user function to make the comparison
+     **/
+    public <C extends Comparable<? super C>> void usort(Comparator<Pair<C>> comparator) {;
+        executeMergeSort(comparator, true);
+    }
+
+    /**
+     * @brief lets the user define a sorting function (keeping the key associations)
+     * @param comparator contains the user function to make the comparison
+     **/
+    public <C extends Comparable<? super C>> void uasort(Comparator<Pair<C>> comparator) {;
+        executeMergeSort(comparator, false);
+    }
+
+    /**
+     * @brief sorts the table by key values
+     **/
+    public <C extends Comparable<? super C>> void ksort() {;
+        Comparator<Pair<C>> comparator = new Comparator<Pair<C>>() {
+            @Override
+            public int compare(Pair<C> left, Pair<C> right) {
+                return left.key.compareTo(right.key);
+            }
+        };
+        executeMergeSort(comparator, true);
+    }
+
+    /**
+     * @brief sorts the table by key values
+     **/
+    public <C extends Comparable<? super C>> void krsort() {;
+        Comparator<Pair<C>> comparator = new Comparator<Pair<C>>() {
+            @Override
+            public int compare(Pair<C> left, Pair<C> right) {
+                return right.key.compareTo(left.key);
+            }
+        };
+        executeMergeSort(comparator, true);
+    }
+
+    /**
+     * @brief sorts the table ditcing key associations
+     **/
     public <C extends Comparable<? super C>> void sort() {;
         Comparator<Pair<C>> comparator = new Comparator<Pair<C>>() {
             @Override
@@ -470,9 +536,11 @@ public class PHPArray<T> implements Iterable<T> {
             }
         };
         executeMergeSort(comparator, false);
-        // Take the sorted list
     }
 
+    /**
+     * @brief executes a sort and keeps the current key associations
+     **/
     public <C extends Comparable<? super C>> void asort() {
         Comparator<Pair<C>> comparator = new Comparator<Pair<C>>() {
             @Override
@@ -484,10 +552,18 @@ public class PHPArray<T> implements Iterable<T> {
     }
 
 
+    /**
+     * @brief executes an inverse BFS merge sort (if thats a thing...)
+     * @param comparer the function used to compare the values
+     * @param keep_keys whether or not to rename the keys 0 -> n in order
+     **/
+     @SuppressWarnings("unchecked")
     public <C extends Comparable<? super C>> void
     executeMergeSort(Comparator<Pair<C>> comparer, boolean keep_keys) {
         boolean rename_keys = !keep_keys; // makes the code more readable
-        SortedList<C> root = buildSortLists((Pair<C>)head, comparer);
+        SortedList<C> root = null;
+        Comparable t = (Comparable) head.value;
+        root = buildSortLists((Pair<C>)head, comparer);
         // We will sort until we only have one list
         while(root.next_list != null) {
             // We will sort each of the list for each iteration
@@ -514,14 +590,6 @@ public class PHPArray<T> implements Iterable<T> {
                         next_list.head = null;
                         next_list.next_list = null;
                     }
-                } else if(rename_keys) {
-                    // I don't think we ever get here and care...
-                    // Integer i = 0;
-                    // for(Pair<C> value_to_add = current_list.head; value_to_add != null; value_to_add = value_to_add.next) {
-                    //     //unset(value_to_add.key);
-                    //     //put(i, (T) value_to_add.value);
-                    //     ++i;
-                    // }
                 }
             }
         }
@@ -529,6 +597,14 @@ public class PHPArray<T> implements Iterable<T> {
         this.tail = (Pair<T>)root.tail;
     }
 
+    /**
+     * @brief combines sorted pairs into a sorted list
+     * @param list_a one of the sorted lists to combine
+     * @param list_b the other sorted list to combine
+     * @param comparer the function used to compare the values
+     * @param rename_keys whether or not to rewrite the current table with the merged list
+     * @return A sorted list of the combined lists or null (if rename_keys == true)
+     **/
     private <C extends Comparable<? super C>> SortedList<C>
     combineSortedPairs(Pair<C> list_a, Pair<C> list_b, Comparator<Pair<C>> comparer, boolean rename_keys) {
         PHPArray<T> sim_hash_table = null;

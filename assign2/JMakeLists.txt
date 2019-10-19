@@ -1,9 +1,5 @@
 ASSIGN_2_SRC=(
     src/Assig2.java
-    src/LinearProbingHashST.java
-    src/Queue.java
-    src/StdIn.java
-    src/StdOut.java
     src/PHPArray.java
 )
 
