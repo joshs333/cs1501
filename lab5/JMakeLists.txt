@@ -1,0 +1,14 @@
+LZWSRC=(
+    src/BinaryStdIn.java
+    src/BinaryStdOut.java
+    src/LZWmod.java
+    src/Queue.java
+    src/StdIn.java
+    src/StdOut.java
+    src/TSTmod.java
+)
+
+add_src LZW ${LZWSRC[@]}
+
+# add_executable LZW lzw LZW
+add_executable LZW lzw_mod LZWmod

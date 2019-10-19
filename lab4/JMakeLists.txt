@@ -1,8 +1,1 @@
-PHPSRC=(
-    src/PHPArray.java
-)
-PHPClass=PHPArray
-
-add_src $PHPClass ${PHPSRC[@]}
-add_jar $PHPClass php_array
-add_executable $PHPClass php_array
+add_src PHPArray src/PHPArray.java src/RunTests.java

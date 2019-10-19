@@ -1,0 +1,29 @@
+ASSIGN_2_SRC=(
+    src/Assig2.java
+    src/LinearProbingHashST.java
+    src/Queue.java
+    src/StdIn.java
+    src/StdOut.java
+    src/PHPArray.java
+)
+
+add_src php_array ${ASSIGN_2_SRC[@]}
+
+add_post_build_command php_array create_zip_package
+
+function create_zip_package() {
+    my_zip_file=${JMAKE_BUILD_DIRECTORY}/${JMAKE_CURRENT_BUILD_PKG}_src.zip
+    pre_make_dir=${JMAKE_CURRENT_BUILD_DIR}/ZIP_CREATION
+
+    if [ -e $pre_make_dir ]; then
+        rm -rf $pre_make_dir
+    fi
+    if [ -f $my_zip_file ]; then
+        rm $my_zip_file
+    fi
+    mkdir -p $pre_make_dir
+    cp -r ${JMAKE_SOURCE_DIRECTORY}/src/* $pre_make_dir
+    cp -r ${JMAKE_SOURCE_DIRECTORY}/pkg_include/* $pre_make_dir
+    cd $pre_make_dir
+    zip $my_zip_file -r *
+}
