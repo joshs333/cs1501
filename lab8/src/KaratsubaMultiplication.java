@@ -10,7 +10,6 @@ public class KaratsubaMultiplication
 
 	public static BigInteger karatsuba(final BigInteger factor0, final BigInteger factor1, final int base)
 	{
-        //base cases
 		//downshift to regular multiplication if the factors are both less than the maximum integer values to create a long value
         int factor0_bl = factor0.bitLength();
         int factor1_bl = factor1.bitLength();
@@ -59,7 +58,17 @@ public class KaratsubaMultiplication
 		}
 		else
 		{
-			factor0 = new BigInteger(args[0]);
+            if(args[2].equals("2")) {
+                char[] chars = args[0].toCharArray();
+                factor0 = BigInteger.valueOf(0);
+                for(int i = 0; i < chars.length; ++i) {
+                    if(chars[i] == '1') {
+                        factor0 = factor0.setBit(chars.length - i - 1);
+                    }
+                }
+            } else {
+    			factor0 = new BigInteger(args[0]);
+            }
 		}
 		if(args[1].equalsIgnoreCase("r") || args[1].equalsIgnoreCase("rand") || args[1].equalsIgnoreCase("random"))
 		{
@@ -68,10 +77,28 @@ public class KaratsubaMultiplication
 		}
 		else
 		{
-			factor1 = new BigInteger(args[1]);
+            if(args[2].equals("2")) {
+                char[] chars = args[1].toCharArray();
+                factor1 = BigInteger.valueOf(0);
+                for(int i = 0; i < chars.length; ++i) {
+                    if(chars[i] == '1') {
+                        factor1 = factor0.setBit(chars.length - i - 1);
+                    }
+                }
+            } else {
+    			factor1 = new BigInteger(args[1]);
+            }
 		}
 		final BigInteger result = karatsuba(factor0, factor1, Integer.parseInt(args[2]));
-		System.out.println(result);
+        if(args[2].equals("2")) {
+            StringBuilder sresult = new StringBuilder();
+            for(int i = result.bitLength() - 1; i >= 0; --i) {
+                sresult.append(result.testBit(i) ? "1" : "0");
+            }
+    		System.out.println(sresult);
+        } else {
+    		System.out.println(result);
+        }
 		System.out.println(result.equals(factor0.multiply(factor1)));
 	}
 }

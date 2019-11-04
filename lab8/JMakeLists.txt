@@ -1,1 +1,2 @@
+create_setup_bash sc.bash
 add_src mult src/KaratsubaMultiplication.java

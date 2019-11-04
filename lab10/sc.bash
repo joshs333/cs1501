@@ -1,11 +1,12 @@
 #!/bin/bash
-WORKSPACE_DIRECTORY=/Users/joshua.spisak/Coding/school/cs1501/lab8
-WORKSPACE_BUILD_DIRECTORY=/Users/joshua.spisak/Coding/school/cs1501/lab8/build
+WORKSPACE_DIRECTORY=/Users/joshua.spisak/Coding/school/cs1501/lab10
+WORKSPACE_BUILD_DIRECTORY=/Users/joshua.spisak/Coding/school/cs1501/lab10/build
 WORKSPACE_FILE_INFO_FILE=${WORKSPACE_BUILD_DIRECTORY}/JMAKE_FILE_INFO.txt
 WORKSPACE_BUILD_INFO_FILE=${WORKSPACE_BUILD_DIRECTORY}/JMAKE_BUILD_INFO.txt
-if [ ! $PATH == *"/Users/joshua.spisak/Coding/school/cs1501/lab8/build"* ]; then
-    PATH="$PATH:/Users/joshua.spisak/Coding/school/cs1501/lab8/build"
+if [ ! $PATH == *"/Users/joshua.spisak/Coding/school/cs1501/lab10/build"* ]; then
+    PATH="$PATH:/Users/joshua.spisak/Coding/school/cs1501/lab10/build"
 fi
+alias workspace_cd="cd $WORKSPACE_DIRECTORY"
 
 ##
 # @brief goes to the build directory, makes code then returns
@@ -132,3 +133,55 @@ function run() {
     eval "java -cp $PKG_CLASS_PATH ${FULL_CLASS_PATH} ${ARGUMENTS_TO_EXEC}"
     return $?
 }
+_run_completions() {
+    if [ "${#COMP_WORDS[@]}" == "2" ] && [ -f "$WORKSPACE_FILE_INFO_FILE" ]; then
+        source $WORKSPACE_FILE_INFO_FILE
+        options=()
+        for ((i=0;i<${#JMAKE_CLASS_NAME[@]};++i)); do
+            CLASS_MATCH=false
+            PKG_MATCH=false
+            NAME_MATCH=false
+            for ((j=0;j<${#JMAKE_CLASS_NAME[@]};++j)); do
+                if [ $i == $j ]; then
+                    continue
+                fi
+                if [ ${JMAKE_CLASS_NAME[i]} == ${JMAKE_CLASS_NAME[j]} ] && [ ${JMAKE_CLASS_FULL_NAME[i]} == ${JMAKE_CLASS_FULL_NAME[j]} ]; then
+                    # short name & full class name match (package can be added to either to make a match)
+                    CLASS_MATCH=true
+                elif [ ${JMAKE_CLASS_NAME[i]} == ${JMAKE_CLASS_NAME[j]} ] && [ ${JMAKE_CLASS_PKG[i]} == ${JMAKE_CLASS_PKG[j]} ]; then
+                    # short name & package name match (full path name can be used to make a match)
+                    PKG_MATCH=true
+                elif [ ${JMAKE_CLASS_NAME[i]} == ${JMAKE_CLASS_NAME[j]} ]; then
+                    # Only the short name matches, full name or package name added will match
+                    NAME_MATCH=true
+                fi
+            done
+            # The fully resolved path should always work
+            options+=("${JMAKE_CLASS_PKG[i]}/${JMAKE_CLASS_FULL_NAME[i]}")
+            if [ $CLASS_MATCH == true ] && [ $PKG_MATCH == true ]; then
+                # nothing special happens in this case...
+                $()
+            elif [ $CLASS_MATCH == true ]; then
+                # the package can be added to the short name to make it match
+                options+=("${JMAKE_CLASS_PKG[i]}/${JMAKE_CLASS_NAME[i]}")
+            elif [ $PKG_MATCH == true ]; then
+                # the using the full package name will produce a match
+                options+=("${JMAKE_CLASS_FULL_NAME[i]}")
+            elif [ $NAME_MATCH == true ]; then
+                # the using the full package name or adding a package will resolve it will produce a match
+                options+=("${JMAKE_CLASS_FULL_NAME[i]}")
+                options+=("${JMAKE_CLASS_PKG[i]}/${JMAKE_CLASS_NAME[i]}")
+            else
+                # Anything can be used to resolve it!
+                options+=("${JMAKE_CLASS_FULL_NAME[i]}")
+                options+=("${JMAKE_CLASS_PKG[i]}/${JMAKE_CLASS_NAME[i]}")
+                options+=("${JMAKE_CLASS_NAME[i]}")
+            fi
+        done
+        options="${options[@]}"
+        COMPREPLY=($(compgen -W "$options" ${COMP_WORDS[1]}))
+    else
+        COMPREPLY=($(compgen -f -d ${COMP_WORDS[$COMP_CWORD]}))
+    fi
+}
+complete -F _run_completions run
