@@ -1,0 +1,260 @@
+running run LZWmod - n s d < src/winnt256.bmp > comp/winnt256.bmp
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.466s
+user	0m0.587s
+sys	0m0.068s
+running run LZWmod + d < comp/winnt256.bmp > un/winnt256.bmp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.272s
+user	0m0.365s
+sys	0m0.052s
+running diff src/winnt256.bmp un/winnt256.bmp
+
+real	0m0.006s
+user	0m0.001s
+sys	0m0.003s
+running run LZWmod - n s d < src/bmps.tar > comp/bmps.tar
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m2.128s
+user	0m2.242s
+sys	0m0.069s
+running run LZWmod + d < comp/bmps.tar > un/bmps.tar
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.339s
+user	0m0.455s
+sys	0m0.055s
+running diff src/bmps.tar un/bmps.tar
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/medium.txt > comp/medium.txt
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.268s
+user	0m0.349s
+sys	0m0.046s
+running run LZWmod + d < comp/medium.txt > un/medium.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.247s
+user	0m0.311s
+sys	0m0.050s
+running diff src/medium.txt un/medium.txt
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s
+running run LZWmod - n s d < src/Lego-big.gif.temp > comp/Lego-big.gif.temp
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.359s
+user	0m0.478s
+sys	0m0.050s
+running run LZWmod + d < comp/Lego-big.gif.temp > un/Lego-big.gif.temp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.280s
+user	0m0.369s
+sys	0m0.056s
+running diff src/Lego-big.gif.temp un/Lego-big.gif.temp
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/code.txt > comp/code.txt
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.310s
+user	0m0.384s
+sys	0m0.056s
+running run LZWmod + d < comp/code.txt > un/code.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.253s
+user	0m0.310s
+sys	0m0.051s
+running diff src/code.txt un/code.txt
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/edit.exe > comp/edit.exe
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.395s
+user	0m0.537s
+sys	0m0.054s
+running run LZWmod + d < comp/edit.exe > un/edit.exe
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.282s
+user	0m0.385s
+sys	0m0.053s
+running diff src/edit.exe un/edit.exe
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/code2.txt > comp/code2.txt
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.265s
+user	0m0.379s
+sys	0m0.046s
+running run LZWmod + d < comp/code2.txt > un/code2.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.256s
+user	0m0.329s
+sys	0m0.052s
+running diff src/code2.txt un/code2.txt
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/texts.tar > comp/texts.tar
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m1.028s
+user	0m1.199s
+sys	0m0.070s
+running run LZWmod + d < comp/texts.tar > un/texts.tar
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.299s
+user	0m0.437s
+sys	0m0.049s
+running diff src/texts.tar un/texts.tar
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/large.txt > comp/large.txt
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.932s
+user	0m1.096s
+sys	0m0.059s
+running run LZWmod + d < comp/large.txt > un/large.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.286s
+user	0m0.431s
+sys	0m0.051s
+running diff src/large.txt un/large.txt
+
+real	0m0.005s
+user	0m0.002s
+sys	0m0.003s
+running run LZWmod - n s d < src/assig2.doc > comp/assig2.doc
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.293s
+user	0m0.406s
+sys	0m0.054s
+running run LZWmod + d < comp/assig2.doc > un/assig2.doc
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.245s
+user	0m0.353s
+sys	0m0.048s
+running diff src/assig2.doc un/assig2.doc
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/frosty.jpg > comp/frosty.jpg
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.394s
+user	0m0.528s
+sys	0m0.055s
+running run LZWmod + d < comp/frosty.jpg > un/frosty.jpg
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.278s
+user	0m0.382s
+sys	0m0.054s
+running diff src/frosty.jpg un/frosty.jpg
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/gone_fishing.bmp.Z > comp/gone_fishing.bmp.Z
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m0.274s
+user	0m0.367s
+sys	0m0.049s
+running run LZWmod + d < comp/gone_fishing.bmp.Z > un/gone_fishing.bmp.Z
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.257s
+user	0m0.300s
+sys	0m0.051s
+running diff src/gone_fishing.bmp.Z un/gone_fishing.bmp.Z
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - n s d < src/wacky.bmp > comp/wacky.bmp
+Running with W_MIN: 12 W_MAX: 12 L: 4096
+
+real	0m8.427s
+user	0m8.543s
+sys	0m0.068s
+running run LZWmod + d < comp/wacky.bmp > un/wacky.bmp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Disallowing reset.
+Using static length code words.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+
+real	0m0.276s
+user	0m0.352s
+sys	0m0.053s
+running diff src/wacky.bmp un/wacky.bmp
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s

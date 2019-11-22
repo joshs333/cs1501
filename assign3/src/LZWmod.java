@@ -1,12 +1,10 @@
 /*************************************************************************
- *  Compilation:  javac LZWmod.java
- *  Execution:    java LZWmod - < input.txt   (compress)
- *  Execution:    java LZWmod + < input.txt   (expand)
- *  Dependencies: BinaryStdIn.java BinaryStdOut.java
+ * @brief LZWmod.java
+ * @author Joshua Spisak <jjs231@pitt.edu>
+ * @date 11/04/2019
  *
- *  Compress or expand binary input from standard input using LZW.
- *
- *
+ * This code was taken from the provided LZW.java/extended lab code then
+ *  modified to fulfill this assignment.
  *************************************************************************/
 
 public class LZWmod {
@@ -24,13 +22,27 @@ public class LZWmod {
     private static boolean allow_reset;
     //! Whether or not to print debug statemnets
     private static boolean print_debugs;
+    //! Flag to use for printing out something only once
+    private static boolean out_of_words = false;
 
+    /**
+     * @brief compresses the data from stdin, to stdout
+     **/
     public static void compress() {
+        // Set a bit in the file to determing whether or not it's allowing reset
         if(allow_reset) {
             BinaryStdOut.write(1, 1);
         } else {
             BinaryStdOut.write(0, 1);
         }
+        // Set a bit to determine whether or not to allow dynamic lengths
+        if(W_MIN == W_MAX) {
+            BinaryStdOut.write(1, 1);
+        } else {
+            BinaryStdOut.write(0, 1);
+        }
+        int written_codewords = 0;
+
         TSTmod<Integer> st = new TSTmod<Integer>();
         for (int i = 0; i < R; i++)
             st.put(new StringBuilder("" + (char) i), i);
@@ -50,6 +62,7 @@ public class LZWmod {
 
             if(!st.contains(current)){
                 BinaryStdOut.write(codeword, W);
+                ++written_codewords;
                 if (code < L) {    // Add to symbol table if not full
                     st.put(current, code++);
                 } else if(W < W_MAX){ // If we can increment W, do that
@@ -66,6 +79,9 @@ public class LZWmod {
                         st.put(new StringBuilder("" + (char) i), i);
                     code = R+1;  // R is codeword for EOF
                     st.put(current, code++);
+                } else if(!out_of_words && print_debugs) {
+                    out_of_words = true;
+                    System.err.println("Ran out of codewords! :( (I have written " + written_codewords + " so far...");
                 }
                 current = new StringBuilder();
                 current.append(c);
@@ -79,9 +95,13 @@ public class LZWmod {
 
         BinaryStdOut.write(R, W); //Write EOF
         BinaryStdOut.close();
-    }
+        if(print_debugs)
+            System.err.println("Wrote " + written_codewords + " codewords.");
+    } /* compress() */
 
-
+    /**
+     * @brief decompresses the data from stdin, to stdout
+     **/
     public static void expand() {
         if(BinaryStdIn.readInt(1) == 1) {
             if(print_debugs)
@@ -92,8 +112,20 @@ public class LZWmod {
                 System.err.println("Disallowing reset.");
             allow_reset = false;
         }
-        if(print_debugs)
-            System.err.println(1 << W_MAX);
+        if(BinaryStdIn.readInt(1) == 1) {
+            if(print_debugs)
+                System.err.println("Using static length code words.");
+                System.err.println("Using dynamic length code words, W_MIN: " + W_MIN + " W_MAX: " + W_MAX + " W: " + W);
+            W_MIN = W_MAX = W = 12;
+            L = 1 << W;
+        } else {
+            W_MIN = 9;
+            W_MAX = 16;
+            W = 9;
+            L = 1 << W;
+            if(print_debugs)
+                System.err.println("Using dynamic length code words, W_MIN: " + W_MIN + " W_MAX: " + W_MAX + " W: " + W);
+        }
         String[] st = new String[1 << W_MAX];
         int i; // next available codeword value
 
@@ -107,13 +139,13 @@ public class LZWmod {
 
         while (true) {
             BinaryStdOut.write(val);
-            if(i < L) {
+            // If we are not reaching the end of the current L
+            // Or we aren't dynamically changing code length
+            if(i < L || W_MIN == W_MAX) {
                 codeword = BinaryStdIn.readInt(W);
             } else {
                 if(W < W_MAX) {
                     codeword = BinaryStdIn.readInt(W + 1);
-                    if(print_debugs)
-                        System.err.println(codeword);
                 } else if(allow_reset) {
                     codeword = BinaryStdIn.readInt(W_MIN);
                 } else {
@@ -147,9 +179,7 @@ public class LZWmod {
 
         }
         BinaryStdOut.close();
-    }
-
-
+    } /* expand() */
 
     public static void main(String[] args) {
         // Whether or not to allow resets
@@ -182,6 +212,5 @@ public class LZWmod {
         if      (args[0].equals("-")) compress();
         else if (args[0].equals("+")) expand();
         else throw new RuntimeException("Illegal command line argument");
-    }
-
-}
+    } /* main() */
+} /* LZWmod */

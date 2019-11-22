@@ -1,0 +1,402 @@
+running run LZWmod - r d < src/winnt256.bmp > comp/winnt256.bmp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.497s
+user	0m0.667s
+sys	0m0.062s
+running run LZWmod + d < comp/winnt256.bmp > un/winnt256.bmp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+
+real	0m0.306s
+user	0m0.397s
+sys	0m0.054s
+running diff src/winnt256.bmp un/winnt256.bmp
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - r d < src/bmps.tar > comp/bmps.tar
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m8.775s
+user	0m8.963s
+sys	0m0.073s
+running run LZWmod + d < comp/bmps.tar > un/bmps.tar
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+
+real	0m0.309s
+user	0m0.440s
+sys	0m0.058s
+running diff src/bmps.tar un/bmps.tar
+
+real	0m0.009s
+user	0m0.002s
+sys	0m0.006s
+running run LZWmod - r d < src/medium.txt > comp/medium.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.317s
+user	0m0.389s
+sys	0m0.057s
+running run LZWmod + d < comp/medium.txt > un/medium.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+
+real	0m0.252s
+user	0m0.317s
+sys	0m0.053s
+running diff src/medium.txt un/medium.txt
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s
+running run LZWmod - r d < src/Lego-big.gif.temp > comp/Lego-big.gif.temp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.438s
+user	0m0.571s
+sys	0m0.055s
+running run LZWmod + d < comp/Lego-big.gif.temp > un/Lego-big.gif.temp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+
+real	0m0.305s
+user	0m0.452s
+sys	0m0.062s
+running diff src/Lego-big.gif.temp un/Lego-big.gif.temp
+
+real	0m0.005s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - r d < src/code.txt > comp/code.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.303s
+user	0m0.423s
+sys	0m0.053s
+running run LZWmod + d < comp/code.txt > un/code.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+
+real	0m0.278s
+user	0m0.361s
+sys	0m0.060s
+running diff src/code.txt un/code.txt
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - r d < src/edit.exe > comp/edit.exe
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.509s
+user	0m0.697s
+sys	0m0.053s
+running run LZWmod + d < comp/edit.exe > un/edit.exe
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+
+real	0m0.338s
+user	0m0.457s
+sys	0m0.057s
+running diff src/edit.exe un/edit.exe
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - r d < src/code2.txt > comp/code2.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.298s
+user	0m0.406s
+sys	0m0.053s
+running run LZWmod + d < comp/code2.txt > un/code2.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+
+real	0m0.267s
+user	0m0.361s
+sys	0m0.047s
+running diff src/code2.txt un/code2.txt
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s
+running run LZWmod - r d < src/texts.tar > comp/texts.tar
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m1.321s
+user	0m1.596s
+sys	0m0.076s
+running run LZWmod + d < comp/texts.tar > un/texts.tar
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+
+real	0m0.482s
+user	0m0.713s
+sys	0m0.084s
+running diff src/texts.tar un/texts.tar
+
+real	0m0.009s
+user	0m0.002s
+sys	0m0.006s
+running run LZWmod - r d < src/large.txt > comp/large.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m1.241s
+user	0m1.495s
+sys	0m0.068s
+running run LZWmod + d < comp/large.txt > un/large.txt
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+
+real	0m0.425s
+user	0m0.654s
+sys	0m0.073s
+running diff src/large.txt un/large.txt
+
+real	0m0.007s
+user	0m0.002s
+sys	0m0.004s
+running run LZWmod - r d < src/assig2.doc > comp/assig2.doc
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.334s
+user	0m0.450s
+sys	0m0.054s
+running run LZWmod + d < comp/assig2.doc > un/assig2.doc
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+
+real	0m0.268s
+user	0m0.379s
+sys	0m0.051s
+running diff src/assig2.doc un/assig2.doc
+
+real	0m0.002s
+user	0m0.001s
+sys	0m0.001s
+running run LZWmod - r d < src/frosty.jpg > comp/frosty.jpg
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.523s
+user	0m0.686s
+sys	0m0.065s
+running run LZWmod + d < comp/frosty.jpg > un/frosty.jpg
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+Going from 15 to 16 L is now 65536
+Going from 16 to 9 L is now 512
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+Going from 14 to 15 L is now 32768
+
+real	0m0.310s
+user	0m0.433s
+sys	0m0.051s
+running diff src/frosty.jpg un/frosty.jpg
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s
+running run LZWmod - r d < src/gone_fishing.bmp.Z > comp/gone_fishing.bmp.Z
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m0.307s
+user	0m0.373s
+sys	0m0.055s
+running run LZWmod + d < comp/gone_fishing.bmp.Z > un/gone_fishing.bmp.Z
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+Going from 12 to 13 L is now 8192
+Going from 13 to 14 L is now 16384
+
+real	0m0.264s
+user	0m0.319s
+sys	0m0.053s
+running diff src/gone_fishing.bmp.Z un/gone_fishing.bmp.Z
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.002s
+running run LZWmod - r d < src/wacky.bmp > comp/wacky.bmp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+
+real	0m8.759s
+user	0m8.898s
+sys	0m0.063s
+running run LZWmod + d < comp/wacky.bmp > un/wacky.bmp
+Running with W_MIN: 9 W_MAX: 16 L: 512
+Allowing reset.
+Using dynamic length code words, W_MIN: 9 W_MAX: 16 W: 9
+Going from 9 to 10 L is now 1024
+Going from 10 to 11 L is now 2048
+Going from 11 to 12 L is now 4096
+
+real	0m0.282s
+user	0m0.356s
+sys	0m0.057s
+running diff src/wacky.bmp un/wacky.bmp
+
+real	0m0.008s
+user	0m0.002s
+sys	0m0.006s
